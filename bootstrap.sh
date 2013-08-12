@@ -21,5 +21,4 @@ unset doIt
 
 # perms
 chmod 700 ~/.ssh
-chmod 644 ~/.ssh/*
-chmod 600 ~/.ssh/{authorized_keys,config}
+chmod 600 ~/.ssh/*
