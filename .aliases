@@ -50,3 +50,6 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 #alias cn='zhcon --utf8'
+
+# fix tmux & vi color issue: http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
+alias tmux="TERM=screen-256color-bce tmux"
