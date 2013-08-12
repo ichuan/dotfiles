@@ -1,96 +1,88 @@
-" Make Vim more useful
-set nocompatible
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-" Enhance command-line completion
-set wildmenu
-" Allow cursor keys in insert mode
-set esckeys
-" Allow backspace in insert mode
-set backspace=indent,eol,start
-" Optimize for fast terminal connections
-set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Change mapleader
-let mapleader=","
-" Don’t add empty newlines at the end of files
-set binary
-set noeol
-" Centralize backups, swapfiles and undo history
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
-
-" Respect modeline in files
-set modeline
-set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
-set secure
-" Enable line numbers
+"显示行号
 set number
-" Enable syntax highlighting
-syntax on
-" Highlight current line
-set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
-" Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set list
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse=a
-" Disable error bells
+"不发出错误滴滴声
 set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
+"高亮显示匹配的括号
+set showmatch
+
+"统一缩进为2个空格
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
+
+"高亮搜索结果
+set hlsearch
+"高亮第81列
+set cc=81
+"编码
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8
+"不自动备份
+set nobackup
+"主题
+set t_Co=256
+let g:rehash256 = 1
+color molokai
+set background=dark
+"插件
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+"Taglist
+let Tlist_Use_Right_Window=0
+let Tlist_File_Fold_Auto_Close=1
+"插入日期
+:map <F5> :r !date "+\%Y-\%m-\%e \%T"<CR><Esc>kJo
+"python
+:map <F6> <Esc>i# -*- coding: utf-8 -*-<Esc>o
+"fu*k mouse
+set mouse=
+"paste mode toggle is F9
+set pt=<f9>
+
+"
+function HeaderPython()
+	call setline(1, "#!/usr/bin/env python")
+	call append(1, "# coding: utf-8")
+	call append(2, "# yc@" . strftime('%Y/%m/%d', localtime()))
+	normal G
+	normal o
+	normal o
+endf
+
+" 新py文件自动追加头部
+autocmd bufnewfile *.py call HeaderPython()
+
+" 不兼容
+set nocompatible
+
+"
 set showcmd
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
 
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
-	let save_cursor = getpos(".")
-	let old_query = getreg('/')
-	:%s/\s\+$//e
-	call setpos('.', save_cursor)
-	call setreg('/', old_query)
-endfunction
-noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
+"折叠
+set foldmethod=marker
 
-" Automatic commands
-if has("autocmd")
-	" Enable file type detection
-	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+"高亮
+filetype on
+filetype plugin on
+syntax enable
+set grepprg=grep\ -nH\ $*
+
+"自动缩进
+set autoindent
+
+"无拼写检查
+if version >= 700
+   set spl=en spell
+   set nospell
 endif
+
+"
+set wildmenu
+set wildmode=list:longest,full
+
+"
+set backspace=2

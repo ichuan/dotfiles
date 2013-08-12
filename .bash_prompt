@@ -51,5 +51,6 @@ function parse_git_branch() {
 	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
 }
 
-export PS1="\[${BOLD}${MAGENTA}\]\u \[$WHITE\]at \[$ORANGE\]\h \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n\$ \[$RESET\]"
+# http://wiki.gentoo.org/wiki/Bash
+export PS1='(\t) \e[1;32m\]\u \e[1;37m\]\w \e[1;34m\]\$\e[0m\]'
 export PS2="\[$ORANGE\]→ \[$RESET\]"
