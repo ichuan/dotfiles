@@ -7,3 +7,9 @@ This is yc's dotfiles(keywords: bash, vim), originally forked from [mathiasbynen
 ```bash
 git clone https://github.com/ichuan/dotfiles.git && cd dotfiles && source bootstrap.sh
 ```
+
+or
+
+```bash
+wget https://github.com/ichuan/dotfiles/tarball/master -O - | tar zxf - && bash ichuan-dotfiles-*/bootstrap.sh
+```
