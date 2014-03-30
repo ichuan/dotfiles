@@ -52,5 +52,6 @@ function parse_git_branch() {
 }
 
 # http://wiki.gentoo.org/wiki/Bash
-export PS1='(\t) \[${GREEN}\]\u \[${RESET}\]\w \[${PURPLE}\]\$\[${RESET}\]'
+#export PS1='(\t) \[${GREEN}\]\u \[${RESET}\]\w \[${PURPLE}\]\$\[${RESET}\]'
+export PS1='(\t) \e[1;32m\]\u \e[1;37m\]\w \e[1;34m\]\$ \e[0m\]'
 export PS2="\[$ORANGE\]→ \[$RESET\]"
