@@ -53,3 +53,7 @@ command -v grunt > /dev/null && alias grunt="grunt --stack"
 
 # fix tmux & vi color issue: http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
 alias tmux="TERM=screen-256color-bce tmux"
+
+alias cnpm="npm --registry=http://registry.cnpmjs.org --cache=$HOME/.npm/.cache/cnpm"
+
+alias cd..="cd .."
