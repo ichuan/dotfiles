@@ -9,3 +9,9 @@
 	st = status
 	di = diff
 	br = branch
+	cl = clone
+  logs = log --graph --oneline --all --abbrev-commit --decorate
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
