@@ -21,6 +21,11 @@ set fileencoding=utf-8
 set fileencodings=utf-8
 "不自动备份
 set nobackup
+"高亮
+filetype on
+filetype plugin on
+syntax enable
+set grepprg=grep\ -nH\ $*
 "主题
 set t_Co=256
 let g:rehash256 = 1
@@ -64,12 +69,6 @@ set showcmd
 
 "折叠
 set foldmethod=marker
-
-"高亮
-filetype on
-filetype plugin on
-syntax enable
-set grepprg=grep\ -nH\ $*
 
 "自动缩进
 set autoindent
