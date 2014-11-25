@@ -1,5 +1,5 @@
 # OSX: after `brew install coreutils`
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:${HOME}/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Load the shell dotfiles, and then some:
@@ -31,5 +31,9 @@ done
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
+
+# Tab completion for python interpreter
+export PYTHONSTARTUP=~/.pythonrc
+
 # OSX: after `brew install bash_completion`
 which -s brew && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
