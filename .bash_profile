@@ -36,4 +36,4 @@ done
 export PYTHONSTARTUP=~/.pythonrc
 
 # OSX: after `brew install bash_completion`
-which -s brew && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
