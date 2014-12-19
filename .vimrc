@@ -37,7 +37,6 @@ syntax enable
 set t_Co=256
 let g:rehash256=1
 color molokai
-set background=dark
 
 " 插件
 let g:miniBufExplMapWindowNavVim=1
