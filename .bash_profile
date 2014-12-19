@@ -37,3 +37,6 @@ export PYTHONSTARTUP=~/.pythonrc
 
 # OSX: after `brew install bash_completion`
 which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+
+# dircolors from https://github.com/seebi/dircolors-solarized
+eval `dircolors ~/.dircolors.ansi-dark`
