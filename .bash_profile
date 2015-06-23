@@ -39,4 +39,8 @@ export PYTHONSTARTUP=~/.pythonrc
 which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
 # dircolors from https://github.com/seebi/dircolors-solarized
-eval `dircolors ~/.dircolors.ansi-dark`
+#eval `dircolors ~/.dircolors.ansi-dark`
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion

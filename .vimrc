@@ -76,3 +76,7 @@ set wildmode=list:longest,full
 set backspace=2
 set showcmd
 filetype plugin indent on
+
+" 识别 .es6 扩展名
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd BufRead,BufNewFile *.es setfiletype javascript
