@@ -1,6 +1,9 @@
 " 不兼容
 set nocompatible
 
+" 插件
+execute pathogen#infect()
+
 " 显示行号
 set number
 
@@ -36,13 +39,8 @@ syntax enable
 " 主题
 set t_Co=256
 let g:rehash256=1
-color molokai
-
-" 插件
-let g:miniBufExplMapWindowNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplModSelTarget=1
+"color molokai
+color Tomorrow-Night-Bright
 
 " no mouse
 set mouse=
@@ -80,3 +78,25 @@ filetype plugin indent on
 " 识别 .es6 扩展名
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd BufRead,BufNewFile *.es setfiletype javascript
+
+" linters
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+" 代码片段
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" 插件
+let g:miniBufExplMapWindowNavVim=1
+let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplModSelTarget=1
+
