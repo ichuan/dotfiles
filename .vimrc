@@ -22,8 +22,8 @@ set expandtab
 " 高亮搜索结果
 set hlsearch
 
-" 高亮第81列
-set colorcolumn=81
+" 高亮第79列
+set colorcolumn=79
 
 " UTF8 编码
 set encoding=utf-8
@@ -88,6 +88,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_coffee_checkers = ['coffeelint']
 
 " 代码片段
 let g:UltiSnipsExpandTrigger="<tab>"
