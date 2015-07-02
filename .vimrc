@@ -89,6 +89,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_coffee_checkers = ['coffeelint']
+let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming empty <li>']
 
 " 代码片段
 let g:UltiSnipsExpandTrigger="<tab>"
