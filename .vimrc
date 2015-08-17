@@ -22,8 +22,8 @@ set expandtab
 " 高亮搜索结果
 set hlsearch
 
-" 高亮第79列
-set colorcolumn=79
+" 高亮第80列
+set colorcolumn=80
 
 " UTF8 编码
 set encoding=utf-8
@@ -90,6 +90,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_coffee_checkers = ['coffeelint']
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming empty <li>', '<a> escaping malformed URI reference']
+"" https://github.com/CSSLint/csslint/wiki/Rules
+let g:syntastic_css_csslint_args = "--ignore=adjoining-classes,important,ids,box-model,qualified-headings,unique-headings,universal-selector,overqualified-elements,unqualified-attributes,duplicate-background-images"
 
 " 代码片段
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -101,4 +103,3 @@ let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplModSelTarget=1
-
