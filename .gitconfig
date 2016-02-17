@@ -11,6 +11,7 @@
 	br = branch
 	cl = clone
   logs = log --graph --oneline --all --abbrev-commit --decorate
+  lastchange = log -p --follow -n 1
 [push]
 	default = simple
 [diff]
