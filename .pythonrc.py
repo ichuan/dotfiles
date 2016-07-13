@@ -1,0 +1,6 @@
+import sys
+import readline
+if sys.platform == 'darwin':
+    readline.parse_and_bind('bind ^I rl_complete')
+else:
+    readline.parse_and_bind('tab: complete')
