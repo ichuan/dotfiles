@@ -1,6 +1,9 @@
 # OSX: after `brew install coreutils`
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:${HOME}/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:${HOME}/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="$PATH:${ANDROID_HOME}/tools"
+export PATH="$PATH:${ANDROID_HOME}/platform-tools"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.

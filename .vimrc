@@ -92,6 +92,8 @@ let g:syntastic_coffee_checkers = ['coffeelint']
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming empty <li>', '<a> escaping malformed URI reference']
 "" https://github.com/CSSLint/csslint/wiki/Rules
 let g:syntastic_css_csslint_args = "--ignore=adjoining-classes,important,ids,box-model,qualified-headings,unique-headings,universal-selector,overqualified-elements,unqualified-attributes,duplicate-background-images"
+let g:syntastic_html_tidy_ignore_errors = ['<template> is not recognized!']
+let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
 
 " 代码片段
 let g:UltiSnipsExpandTrigger="<tab>"

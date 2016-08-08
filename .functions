@@ -90,3 +90,9 @@ long (){
     orig=$(readlink -m .)
     [ -e $orig ] && cd $orig
 }
+
+restart_freemind () {
+  ps -fe|grep [F]reeMind|cut -d' ' -f4|xargs kill
+  sleep .5
+  open -a FreeMind
+}

@@ -2,6 +2,8 @@
 alias snv=svn
 alias Grep=grep
 
+alias grep='grep --color=auto'
+
 # List all files colorized in long format
 alias ll="ls -l --color=auto"
 
