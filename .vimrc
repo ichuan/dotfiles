@@ -61,6 +61,11 @@ autocmd bufnewfile *.py call HeaderPython()
 
 " 折叠
 set foldmethod=marker
+set foldnestmax=2
+autocmd BufRead,BufNewFile *.py set foldmethod=indent foldlevel=99
+" press space to fold/unfold code
+nnoremap <space> za
+vnoremap <space> zf
 
 " 自动缩进
 set autoindent
