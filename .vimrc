@@ -99,6 +99,13 @@ let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming em
 let g:syntastic_css_csslint_args = "--ignore=adjoining-classes,important,ids,box-model,qualified-headings,unique-headings,universal-selector,overqualified-elements,unqualified-attributes,duplicate-background-images"
 let g:syntastic_html_tidy_ignore_errors = ['<template> is not recognized!']
 let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
+" 取消当前语法检查
+function! SyntasticDisableBuffer()
+  let b:syntastic_skip_checks = 1
+  SyntasticReset
+  echo 'Syntastic disabled for this buffer'
+endfunction
+command! Unlint call SyntasticDisableBuffer()
 
 " 代码片段
 let g:UltiSnipsExpandTrigger="<tab>"
