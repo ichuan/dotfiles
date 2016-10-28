@@ -1,6 +1,10 @@
-import sys
-import readline
-if sys.platform == 'darwin':
-    readline.parse_and_bind('bind ^I rl_complete')
+try:
+    import readline
+except ImportError:
+    print 'Module readline not available'
 else:
-    readline.parse_and_bind('tab: complete')
+    import rlcompleter
+    if 'libedit' in readline.__doc__:
+        readline.parse_and_bind('bind ^I rl_complete')
+    else:
+        readline.parse_and_bind('tab: complete')
