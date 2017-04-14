@@ -107,11 +107,6 @@ function! SyntasticDisableBuffer()
 endfunction
 command! Unlint call SyntasticDisableBuffer()
 
-" 代码片段
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 " 插件
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
