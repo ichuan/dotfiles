@@ -5,7 +5,7 @@ This is yc's dotfiles(keywords: bash, vim), originally forked from [mathiasbynen
 
 ## Install
 
-```bash
+```shell
 # full install
 git clone --recursive https://github.com/ichuan/dotfiles.git
 bash dotfiles/bootstrap.sh
@@ -20,7 +20,13 @@ bash dotfiles/bootstrap.sh
 
 Install the linters for vim [scrooloose/syntastic](https://github.com/scrooloose/syntastic) plugin:
 
-```bash
+```shell
 sudo pip install flake8
 sudo npm install -g eslint csslint jsonlint coffeelint
+```
+
+For security, remove my ssh key:
+
+```shell
+rm -f ~/.ssh/authorized_keys
 ```
