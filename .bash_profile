@@ -1,9 +1,10 @@
 # OSX: after `brew install coreutils`
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:${HOME}/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:${HOME}/bin:/usr/local/opt/python/libexec/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export ANDROID_HOME=~/Library/Android/sdk
 export PATH="$PATH:${ANDROID_HOME}/tools"
 export PATH="$PATH:${ANDROID_HOME}/platform-tools"
+export PATH="$PATH:${HOME}/go/bin"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -36,14 +37,11 @@ done
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
 # Tab completion for python interpreter
-export PYTHONSTARTUP=~/.pythonrc.py
+# export PYTHONSTARTUP=~/.pythonrc.py
 
 # OSX: after `brew install bash_completion`
 which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
 # dircolors from https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/.dircolors.ansi-dark`
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+export GPG_TTY=$(tty)
