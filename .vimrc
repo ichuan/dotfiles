@@ -7,6 +7,8 @@ execute pathogen#infect()
 " 显示行号
 set number
 
+set ignorecase
+
 " 不发出错误滴滴声
 set noerrorbells
 
@@ -39,8 +41,7 @@ syntax enable
 " 主题
 set t_Co=256
 let g:rehash256=1
-"color molokai
-color Tomorrow-Night-Bright
+color molokai
 
 " no mouse
 set mouse=
@@ -80,18 +81,14 @@ set backspace=2
 set showcmd
 filetype plugin indent on
 
-" 识别 .es6 扩展名
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
-autocmd BufRead,BufNewFile *.es setfiletype javascript
-
 " linters
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_coffee_checkers = ['coffeelint']
 let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming empty <li>', '<a> escaping malformed URI reference']
@@ -99,19 +96,13 @@ let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming em
 let g:syntastic_css_csslint_args = "--ignore=adjoining-classes,important,ids,box-model,qualified-headings,unique-headings,universal-selector,overqualified-elements,unqualified-attributes,duplicate-background-images"
 let g:syntastic_html_tidy_ignore_errors = ['<template> is not recognized!']
 let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
-" 取消当前语法检查
-function! SyntasticDisableBuffer()
-  let b:syntastic_skip_checks = 1
-  SyntasticReset
-  echo 'Syntastic disabled for this buffer'
-endfunction
-command! Unlint call SyntasticDisableBuffer()
 
 " 插件
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplModSelTarget=1
+let g:EditorConfig_core_mode = 'python_external'
 
 " Close Location List
 nmap <F8> :lclose<CR>
