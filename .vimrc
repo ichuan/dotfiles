@@ -41,7 +41,7 @@ syntax enable
 " 主题
 set t_Co=256
 let g:rehash256=1
-color molokai
+color Tomorrow-Night-Bright
 
 " no mouse
 set mouse=
