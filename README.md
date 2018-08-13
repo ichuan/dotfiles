@@ -12,7 +12,7 @@ bash dotfiles/bootstrap.sh
 
 # minimal install
 git clone -b minimal --single-branch --recursive https://github.com/ichuan/dotfiles.git
-bash dotfiles/bootstrap.sh
+bash dotfiles/bootstrap.sh -f
 ```
 
 
@@ -23,10 +23,4 @@ Install the linters for vim [scrooloose/syntastic](https://github.com/scrooloose
 ```shell
 sudo pip install flake8
 sudo npm install -g eslint csslint jsonlint coffeelint
-```
-
-For security, remove my ssh key:
-
-```shell
-rm -f ~/.ssh/authorized_keys
 ```
