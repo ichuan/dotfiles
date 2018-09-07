@@ -1,0 +1,17 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "indent": ["error", 2],
+      "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+      }
+    }
+}

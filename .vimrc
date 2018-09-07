@@ -81,22 +81,6 @@ set backspace=2
 set showcmd
 filetype plugin indent on
 
-" linters
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_coffee_checkers = ['coffeelint']
-let g:syntastic_html_tidy_ignore_errors = ['trimming empty <span>', 'trimming empty <li>', '<a> escaping malformed URI reference']
-"" https://github.com/CSSLint/csslint/wiki/Rules
-let g:syntastic_css_csslint_args = "--ignore=adjoining-classes,important,ids,box-model,qualified-headings,unique-headings,universal-selector,overqualified-elements,unqualified-attributes,duplicate-background-images"
-let g:syntastic_html_tidy_ignore_errors = ['<template> is not recognized!']
-let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
-
 " 插件
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
@@ -104,6 +88,8 @@ let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplModSelTarget=1
 let g:EditorConfig_core_mode = 'python_external'
 
-" Close Location List
-nmap <F8> :lclose<CR>
-imap <F8> <ESC>:lclose<CR>a
+" ALE
+let g:ale_set_highlights = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_open_list = 1
+let g:ale_list_window_size = 5
