@@ -36,9 +36,6 @@ done
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
-# Tab completion for python interpreter
-# export PYTHONSTARTUP=~/.pythonrc.py
-
 # OSX: after `brew install bash_completion`
 which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
