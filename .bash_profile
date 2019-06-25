@@ -1,10 +1,13 @@
 # OSX: after `brew install coreutils`
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:${HOME}/bin:/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:/usr/local/bin:${HOME}/bin:/usr/local/opt/python/libexec/bin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 export ANDROID_HOME=~/Library/Android/sdk
+export ANDROID_SDK_ROOT=~/Library/Android/sdk
 export PATH="$PATH:${ANDROID_HOME}/tools"
 export PATH="$PATH:${ANDROID_HOME}/platform-tools"
 export PATH="$PATH:${HOME}/go/bin"
+export PATH="$PATH:${HOME}/.cargo/bin"
+export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -36,9 +39,14 @@ done
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
+# Tab completion for python interpreter
+# export PYTHONSTARTUP=~/.pythonrc.py
+
 # OSX: after `brew install bash_completion`
 which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 
 # dircolors from https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/.dircolors.ansi-dark`
 export GPG_TTY=$(tty)
+
+export PATH="$HOME/.cargo/bin:$PATH"
