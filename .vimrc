@@ -24,8 +24,8 @@ set expandtab
 " 高亮搜索结果
 set hlsearch
 
-" 高亮第80列
-set colorcolumn=80
+" 高亮第88列
+set colorcolumn=88
 
 " UTF8 编码
 set encoding=utf-8
