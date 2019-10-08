@@ -9,6 +9,9 @@ export PATH="$PATH:${HOME}/go/bin"
 export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 
+# Hide ‘default interactive shell is now zsh’ on macOS Catalina
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
