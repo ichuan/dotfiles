@@ -8,6 +8,7 @@ export PATH="$PATH:${ANDROID_HOME}/platform-tools"
 export PATH="$PATH:${HOME}/go/bin"
 export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # Hide ‘default interactive shell is now zsh’ on macOS Catalina
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -46,10 +47,13 @@ done
 # export PYTHONSTARTUP=~/.pythonrc.py
 
 # OSX: after `brew install bash_completion`
-which brew &>/dev/null && [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # dircolors from https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/.dircolors.ansi-dark`
 export GPG_TTY=$(tty)
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# https://pipenv.kennethreitz.org/en/latest/install/#virtualenv-mapping-caveat
+export PIPENV_VENV_IN_PROJECT=1
