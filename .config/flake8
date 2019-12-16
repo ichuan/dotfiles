@@ -1,0 +1,3 @@
+; https://github.com/nvie/vim-flake8#max-line-lengths
+[flake8]
+max-line-length = 88
