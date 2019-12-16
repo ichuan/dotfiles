@@ -90,5 +90,11 @@ let g:miniBufExplModSelTarget=1
 " ALE
 let g:ale_set_highlights = 0
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines'],
+\   'python': ['black'],
+\}
+let g:ale_fix_on_save = 1
