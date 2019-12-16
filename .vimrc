@@ -81,6 +81,8 @@ set backspace=2
 set showcmd
 filetype plugin indent on
 
+let g:netrw_dirhistmax = 0
+
 " 插件
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
