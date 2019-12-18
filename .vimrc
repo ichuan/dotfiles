@@ -68,6 +68,9 @@ autocmd BufRead,BufNewFile *.py set foldmethod=indent foldlevel=99
 nnoremap <space> za
 vnoremap <space> zf
 
+" ini highlight for conf file
+autocmd BufRead,BufNewFile *.conf setf dosini
+
 " 自动缩进
 set autoindent
 
