@@ -57,3 +57,12 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # https://pipenv.kennethreitz.org/en/latest/install/#virtualenv-mapping-caveat
 export PIPENV_VENV_IN_PROJECT=1
+
+_lazy_nvm() {
+  unalias nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+  nvm "$*"
+}
+alias nvm=_lazy_nvm
