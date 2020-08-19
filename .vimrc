@@ -101,5 +101,8 @@ let g:ale_list_window_size = 5
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
 \   'python': ['black'],
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
 \}
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 let g:ale_fix_on_save = 1
