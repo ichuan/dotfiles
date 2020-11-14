@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd `dirname $(readlink -e $0)`
+cd "`dirname "${BASH_SOURCE[0]}"`" >/dev/null 2>&1
 
 function doIt() {
   test -f ~/.ssh/authorized_keys && mv ~/.ssh/authorized_keys{,.bak}
