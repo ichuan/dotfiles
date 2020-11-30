@@ -6,6 +6,10 @@ function doIt() {
   test -f ~/.ssh/authorized_keys && mv ~/.ssh/authorized_keys{,.bak}
   rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
     --exclude "README.md" --exclude "LICENSE-MIT.txt" -av --no-perms . ~
+  # remove terminal profile if not osx
+  if [[ $OSTYPE != "darwin"* ]];then
+    rm -f ~/Tomorrow_Night_Bright.terminal
+  fi
   source ~/.bash_profile
   test -f ~/.ssh/authorized_keys.bak && mv ~/.ssh/authorized_keys{.bak,}
 }
