@@ -87,10 +87,6 @@ filetype plugin indent on
 let g:netrw_dirhistmax = 0
 
 " 插件
-let g:miniBufExplMapWindowNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplModSelTarget=1
 
 " ALE
 let g:ale_set_highlights = 0
