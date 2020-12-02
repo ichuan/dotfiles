@@ -6,6 +6,6 @@ This is yc's dotfiles(keywords: bash, vim), originally forked from [mathiasbynen
 ## Install
 
 ```shell
-git clone --single-branch --recursive https://github.com/ichuan/dotfiles.git
+git clone --depth=1 --shallow-submodules --single-branch --recursive https://github.com/ichuan/dotfiles.git
 bash dotfiles/bootstrap.sh -f
 ```
