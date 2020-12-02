@@ -86,7 +86,12 @@ filetype plugin indent on
 
 let g:netrw_dirhistmax = 0
 
-" 插件
+" always display buftab
+let g:buftabline_show = 2
+" show buffer number
+let g:buftabline_numbers = 1
+" show modified state
+let g:buftabline_indicators = 1
 
 " ALE
 let g:ale_set_highlights = 0
