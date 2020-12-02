@@ -86,8 +86,8 @@ filetype plugin indent on
 
 let g:netrw_dirhistmax = 0
 
-" always display buftab
-let g:buftabline_show = 2
+" display buftabline only if there are at least two buffers
+let g:buftabline_show = 1
 " show buffer number
 let g:buftabline_numbers = 1
 " show modified state
