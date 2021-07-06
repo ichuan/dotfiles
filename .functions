@@ -6,16 +6,6 @@ if [ $? -eq 0 ]; then
 	}
 fi
 
-# Syntax-highlight JSON strings or files
-# Usage: `json '{"foo":42}'` or `echo '{"foo":42}' | json`
-function json() {
-	if [ -t 0 ]; then # argument
-		python -mjson.tool <<< "$*" | pygmentize -l javascript
-	else # pipe
-		python -mjson.tool | pygmentize -l javascript
-	fi
-}
-
 # Escape UTF-8 characters into their 3-byte format
 function escape() {
 	printf "\\\x%s" $(printf "$@" | xxd -p -c1 -u)
@@ -89,10 +79,4 @@ short (){
 long (){
     orig=$(readlink -m .)
     [ -e $orig ] && cd $orig
-}
-
-restart_freemind () {
-  ps -fe|grep [F]reeMind|cut -d' ' -f4|xargs kill
-  sleep .5
-  open -a FreeMind
 }
