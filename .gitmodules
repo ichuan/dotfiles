@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/vim-polyglot"]
 	path = .vim/bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
+[submodule ".vim/bundle/syntastic-local-solhint"]
+	path = .vim/bundle/syntastic-local-solhint
+	url = https://github.com/sohkai/syntastic-local-solhint
