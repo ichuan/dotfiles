@@ -106,5 +106,5 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \   'solidity': ['prettier'],
 \}
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all'
+let g:ale_javascript_prettier_options = '--single-quote'
 let g:ale_fix_on_save = 1
