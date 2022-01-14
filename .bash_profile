@@ -10,9 +10,6 @@ export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
-# Hide ‘default interactive shell is now zsh’ on macOS Catalina
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -43,17 +40,11 @@ done
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
 
-# Tab completion for python interpreter
-# export PYTHONSTARTUP=~/.pythonrc.py
-
 # OSX: after `brew install bash_completion`
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 # dircolors from https://github.com/seebi/dircolors-solarized
 eval `dircolors ~/.dircolors.ansi-dark`
-export GPG_TTY=$(tty)
-
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # https://pipenv.kennethreitz.org/en/latest/install/#virtualenv-mapping-caveat
 export PIPENV_VENV_IN_PROJECT=1

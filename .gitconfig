@@ -1,18 +1,72 @@
-[user]
-	name = ichuan
-	email = iyanchuan@gmail.com
 [core]
 	editor = vim
+	# Use custom `.gitignore`
+	excludesfile = ~/.gitignore
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	# Make `git rebase` safer on macOS.
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = false
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
 [alias]
 	co = checkout
 	ci = commit
-	st = status
-	di = diff
 	br = branch
-	cl = clone
-  logs = log --graph --oneline --all --abbrev-commit --decorate
-  lastchange = log -p --follow -n 1
+	# Commit all changes.
+	ca = !git add -A && git commit -av
+	# View the current working tree status using the short format.
+	s = status -s
+	# Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat"
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+	# Pull in remote changes for the current repository and all its submodules.
+	p = pull --recurse-submodules
+	# Clone a repository including all submodules.
+	c = clone --recursive
+	# View abbreviated SHA, description, and history graph of the latest 20 commits.
+  l = log --pretty=oneline -n 20 --all --graph --abbrev-commit
+[apply]
+	# Detect whitespace errors when applying a patch.
+	whitespace = fix
+[branch]
+	# Show most recently changed branches first.
+	sort = -committerdate
 [push]
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
+	# Make `git push` push relevant annotated tags when pushing branches out.
+	followTags = true
+[init]
+	defaultBranch = main
 [diff]
 	tool = vimdiff
+	# Detect copies as well as renames.
+	renames = copies
+[diff "bin"]
+	# Use `hexdump` to diff binary files.
+	textconv = hexdump -v -C
+[help]
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
