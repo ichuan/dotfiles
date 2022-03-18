@@ -61,7 +61,7 @@ alias rot13='tr a-zA-Z n-za-mN-ZA-M'
 alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # fix tmux & vi color issue: http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
-alias tmux="TERM=screen-256color-bce tmux"
+# alias tmux="TERM=screen-256color-bce tmux"
 
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
