@@ -748,6 +748,7 @@ font:
 # in the order they were defined in.
 # macOS
 key_bindings:
+  - { key: T,         mods: Command,      action: SpawnNewInstance       }
   - { key: N,         mods: Command,      action: SpawnNewInstance       }
   - { key: Space,     mods: Alt,          chars: " "                     }
   - { key: Back, mods: Super, chars: "\x15" } # delete word/line
