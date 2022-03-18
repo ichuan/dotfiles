@@ -40,8 +40,11 @@ syntax enable
 
 " 主题
 set t_Co=256
+set background=dark
 let g:rehash256=1
 color Tomorrow-Night-Bright
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
 " no mouse
 set mouse=
