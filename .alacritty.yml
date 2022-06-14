@@ -260,7 +260,7 @@ colors:
 selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
-  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t/"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t/;="
 
   # When set to `true`, selected text will be copied to the primary clipboard.
   #save_to_clipboard: false
@@ -631,8 +631,8 @@ selection:
 # in the order they were defined in.
 # macOS
 key_bindings:
-  - { key: T,         mods: Command,      action: SpawnNewInstance       }
-  - { key: N,         mods: Command,      action: SpawnNewInstance       }
+  - { key: T,         mods: Command,      action: CreateNewWindow       }
+  - { key: N,         mods: Command,      action: CreateNewWindow       }
   - { key: Space,     mods: Alt,          chars: " "                     }
   - { key: Back, mods: Super, chars: "\x15" } # delete word/line
   - { key: Left,     mods: Alt,     chars: "\x1bb"                       } # one word left
