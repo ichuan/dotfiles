@@ -65,6 +65,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 command -v pyenv > /dev/null && {
   eval "$(pyenv init --path)"
+  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
   if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then
     eval "$(pyenv init -)"
   fi
