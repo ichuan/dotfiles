@@ -30,7 +30,7 @@
 	# Clone a repository including all submodules.
 	c = clone --recursive
 	# View abbreviated SHA, description, and history graph of the latest 20 commits.
-  l = log --pretty=oneline -n 20 --all --graph --abbrev-commit
+  l = log --pretty=oneline --all --graph --abbrev-commit
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
@@ -57,16 +57,3 @@
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
