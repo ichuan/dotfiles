@@ -6,6 +6,7 @@ export ANDROID_SDK_ROOT=~/Library/Android/sdk
 export PATH="$PATH:${ANDROID_HOME}/tools"
 export PATH="$PATH:${ANDROID_HOME}/platform-tools"
 export PATH="$PATH:${HOME}/go/bin"
+export PATH="$PATH:${HOME}/.local/bin"
 export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
@@ -48,6 +49,8 @@ eval `dircolors ~/.dircolors.ansi-dark`
 
 # https://pipenv.kennethreitz.org/en/latest/install/#virtualenv-mapping-caveat
 export PIPENV_VENV_IN_PROJECT=1
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 
 _lazy_nvm() {
   unalias nvm
