@@ -49,6 +49,7 @@ export GPG_TTY=$(tty);
 
 # https://docs.brew.sh/Analytics#opting-out
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
 # https://clubmate.fi/disable-gatsby-telemetry
 export GATSBY_TELEMETRY_DISABLED=1
 
