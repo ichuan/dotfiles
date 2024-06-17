@@ -16,3 +16,9 @@
 [submodule ".vim/bundle/syntastic-local-solhint"]
 	path = .vim/bundle/syntastic-local-solhint
 	url = https://github.com/sohkai/syntastic-local-solhint
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = https://github.com/ervandew/supertab
