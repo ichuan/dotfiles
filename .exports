@@ -52,6 +52,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 # https://clubmate.fi/disable-gatsby-telemetry
 export GATSBY_TELEMETRY_DISABLED=1
+export NEXT_TELEMETRY_DISABLED=1
 
 # Hide ‘default interactive shell is now zsh’ on macOS Catalina
 export BASH_SILENCE_DEPRECATION_WARNING=1

@@ -113,11 +113,16 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
+let js_fixers = ['prettier', 'eslint']
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
 \   'python': ['black'],
-\   'javascript': ['prettier'],
+\   'javascript': js_fixers,
+\   'javascriptreact': js_fixers,
+\   'typescript': js_fixers,
+\   'typescriptreact': js_fixers,
 \   'css': ['prettier'],
+\   'json': ['prettier'],
 \   'solidity': ['prettier'],
 \}
 let g:ale_javascript_prettier_options = '--single-quote'
