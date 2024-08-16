@@ -114,9 +114,12 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
 let js_fixers = ['prettier', 'eslint']
+let g:ale_linters= {
+\   'python': ['ruff'],
+\}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
-\   'python': ['black'],
+\   'python': ['ruff_format'],
 \   'javascript': js_fixers,
 \   'javascriptreact': js_fixers,
 \   'typescript': js_fixers,
