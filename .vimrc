@@ -130,3 +130,9 @@ let g:ale_fixers = {
 \}
 let g:ale_javascript_prettier_options = '--single-quote'
 let g:ale_fix_on_save = 1
+
+" YCM
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+let g:SuperTabClosePreviewOnPopupClose = 1

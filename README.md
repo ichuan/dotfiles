@@ -12,11 +12,23 @@ git clone --depth 1 --shallow-submodules --recursive https://github.com/ichuan/d
 bash dotfiles/bootstrap.sh -f
 ```
 
-Using release file:
+Or using release file:
 
 ```bash
 wget https://github.com/ichuan/dotfiles/releases/latest/download/dotfiles.tar.gz -O - | tar xzf -
 bash dotfiles/bootstrap.sh -f
+```
+
+Then, install YouCompleteMe plugin of vim:
+```
+# 1. install a vim with python3 support
+# debian
+apt install -y cmake vim-nox
+# macOS
+brew install cmake vim
+
+# 2. install, add `--ts-completer` or `--force-sudo` if needed
+python3 ~/.vim/bundle/YouCompleteMe/install.py
 ```
 
 ## Making release

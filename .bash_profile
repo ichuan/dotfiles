@@ -52,16 +52,10 @@ export PIPENV_VENV_IN_PROJECT=1
 export POETRY_VIRTUALENVS_IN_PROJECT=true
 export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
 
-_lazy_nvm() {
-  unalias nvm
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
-  [ -s "$HOME/.nvm/bash_completion" ] && . "$HOME/.nvm/bash_completion"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm "$*"
-}
-alias nvm=_lazy_nvm
+# nvm and node
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
