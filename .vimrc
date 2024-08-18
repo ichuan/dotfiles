@@ -119,7 +119,7 @@ let g:ale_linters= {
 \}
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines'],
-\   'python': ['ruff_format'],
+\   'python': ['ruff'],
 \   'javascript': js_fixers,
 \   'javascriptreact': js_fixers,
 \   'typescript': js_fixers,
