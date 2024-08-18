@@ -134,5 +134,9 @@ let g:ale_fix_on_save = 1
 " YCM
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
+" Ctrl+i to goto definition or declaration
+" Ctrl+k to goto references
+nnoremap <C-i> :YcmCompleter GoTo<CR>
+nnoremap <C-k> :YcmCompleter GoToReferences<CR>
 
 let g:SuperTabClosePreviewOnPopupClose = 1
