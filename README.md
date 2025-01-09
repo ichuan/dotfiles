@@ -23,7 +23,7 @@ Then, install YouCompleteMe plugin of vim:
 ```
 # 1. install a vim with python3 support
 # debian
-apt install -y cmake vim-nox
+apt install -y cmake vim-nox python3-dev
 # macOS
 brew install cmake vim
 
