@@ -66,3 +66,21 @@ alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.a
 alias cnpm="npm --registry=https://registry.npmmirror.com --cache=$HOME/.npm/.cache/cnpm --disturl=https://npmmirror.com/mirrors/node --userconfig=$HOME/.cnpmrc"
 
 alias i="vi"
+
+# alias for `pbcopy` and `pbpaste`
+if grep -iq "microsoft" /proc/sys/kernel/osrelease; then
+  # WSL environment
+  if command -v powershell.exe &> /dev/null; then # Check if powershell is available
+    alias pbcopy='powershell.exe -Command "Get-Content -Raw | Set-Clipboard"'
+    alias pbpaste='powershell.exe -Command "Get-Clipboard"'
+  fi
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # linux environment, check for xclip or wl-clipboard
+    if command -v xclip &> /dev/null; then
+        alias pbcopy='xclip -selection clipboard'
+        alias pbpaste='xclip -selection clipboard -o'
+    elif command -v wl-paste &> /dev/null; then
+        alias pbpaste='wl-paste'
+        alias pbcopy='wl-copy'
+    fi
+fi
