@@ -74,6 +74,7 @@ if grep -iq "microsoft" /proc/sys/kernel/osrelease; then
     alias pbcopy='powershell.exe -Command "Get-Content -Raw | Set-Clipboard"'
     alias pbpaste='powershell.exe -Command "Get-Clipboard"'
   fi
+  alias open='explorer.exe .'
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
     # linux environment, check for xclip or wl-clipboard
     if command -v xclip &> /dev/null; then
