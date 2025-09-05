@@ -71,7 +71,7 @@ alias i="vi"
 if grep -iq "microsoft" /proc/sys/kernel/osrelease; then
   # WSL environment
   if command -v powershell.exe &> /dev/null; then # Check if powershell is available
-    alias pbcopy='powershell.exe -Command "Get-Content -Raw | Set-Clipboard"'
+    alias pbcopy='iconv -f utf-8 -t gbk | clip.exe'
     alias pbpaste='powershell.exe -Command "Get-Clipboard"'
   fi
   alias open='explorer.exe .'
