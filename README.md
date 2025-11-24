@@ -15,12 +15,6 @@ bash dotfiles/bootstrap.sh -f
 Or using release file:
 
 ```bash
-wget https://github.com/ichuan/dotfiles/releases/latest/download/dotfiles.tar.gz -O - | tar xzf -
+wget https://github.com/ichuan/dotfiles/archive/refs/tags/latest.tar.gz -O - | tar xzf -
 bash dotfiles/bootstrap.sh -f
-```
-
-## Making release
-```bash
-# using https://github.com/Kentzo/git-archive-all
-python /path/to/git_archive_all.py --prefix=dotfiles dotfiles.tar.gz
 ```
