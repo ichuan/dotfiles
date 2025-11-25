@@ -140,3 +140,9 @@ nnoremap <C-i> :YcmCompleter GoTo<CR>
 nnoremap <C-k> :YcmCompleter GoToReferences<CR>
 
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+set laststatus=2
