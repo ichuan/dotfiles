@@ -16,5 +16,5 @@ Or using release file:
 
 ```bash
 wget https://github.com/ichuan/dotfiles/archive/refs/tags/latest.tar.gz -O - | tar xzf -
-bash dotfiles/bootstrap.sh -f
+bash dotfiles-latest/bootstrap.sh -f
 ```
