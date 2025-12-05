@@ -62,3 +62,7 @@ long (){
     orig=$(readlink -m .)
     [ -e $orig ] && cd $orig
 }
+
+cmt() {
+  claude --dangerously-skip-permissions "commit"
+}

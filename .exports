@@ -53,3 +53,5 @@ export NEXT_TELEMETRY_DISABLED=1
 
 # Hide ‘default interactive shell is now zsh’ on macOS Catalina
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1

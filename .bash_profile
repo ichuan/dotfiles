@@ -10,6 +10,7 @@ export PATH="$PATH:${HOME}/.local/bin"
 export PATH="$PATH:${HOME}/.cargo/bin"
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
