@@ -1,31 +1,17 @@
 #!/usr/bin/env bash
 
 # ------------------------------------------------------------------
-# Configuration
-# ------------------------------------------------------------------
-
-# 尝试设置终端颜色模式
-if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
-    export TERM='gnome-256color'
-elif infocmp xterm-256color >/dev/null 2>&1; then
-    export TERM='xterm-256color'
-fi
-
-# ------------------------------------------------------------------
 # Color Definitions
 # ------------------------------------------------------------------
 
 # 使用 tput 获取颜色代码，并直接包裹在 \[ \] 中以防止换行错乱
 # 注意：这里直接定义为 Prompt 安全的字符串
-if tput setaf 1 &> /dev/null; then
+if command -v tput >/dev/null 2>&1 && tput setaf 1 >/dev/null 2>&1; then
     prompt_reset="\[$(tput sgr0)\]"
     prompt_bold="\[$(tput bold)\]"
-    prompt_black="\[$(tput setaf 0)\]"
     prompt_blue="\[$(tput setaf 33)\]"
-    prompt_cyan="\[$(tput setaf 37)\]"
     prompt_green="\[$(tput setaf 64)\]"
     prompt_orange="\[$(tput setaf 166)\]"
-    prompt_purple="\[$(tput setaf 125)\]"
     prompt_red="\[$(tput setaf 124)\]"
     prompt_violet="\[$(tput setaf 61)\]"
     prompt_white="\[$(tput setaf 15)\]"
@@ -33,12 +19,9 @@ if tput setaf 1 &> /dev/null; then
 else
     prompt_reset="\[\e[0m\]"
     prompt_bold=""
-    prompt_black="\[\e[1;30m\]"
     prompt_blue="\[\e[1;34m\]"
-    prompt_cyan="\[\e[1;36m\]"
     prompt_green="\[\e[1;32m\]"
     prompt_orange="\[\e[1;33m\]"
-    prompt_purple="\[\e[1;35m\]"
     prompt_red="\[\e[1;31m\]"
     prompt_violet="\[\e[1;35m\]"
     prompt_white="\[\e[1;37m\]"
@@ -50,22 +33,18 @@ fi
 # ------------------------------------------------------------------
 
 __build_prompt() {
-    # 1. 保存上一个命令的退出代码 (可选，如果需要在提示符显示错误红叉)
-    local exit_code=$?
-
-    # 2. 这里的 PS1 是局部构建，最后导出
     local p=""
 
     # ------------------------------------------------------------------
     # User & Host Logic
     # ------------------------------------------------------------------
     local user_style="${prompt_orange}"
-    if [[ "${USER}" == "root" ]]; then
+    if [[ "${USER:-}" == "root" ]]; then
         user_style="${prompt_red}"
     fi
 
     local host_style="${prompt_yellow}"
-    if [[ "${SSH_TTY}" ]]; then
+    if [[ "${SSH_TTY:-}" ]]; then
         host_style="${prompt_bold}${prompt_red}"
     fi
 
@@ -84,7 +63,7 @@ __build_prompt() {
     # Git Logic (High Performance)
     # ------------------------------------------------------------------
     # 只有在 git 仓库内才执行后续操作
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
+    if command -v git >/dev/null 2>&1 && git rev-parse --is-inside-work-tree &>/dev/null; then
         local branch_name=""
         local git_flags=""
 
@@ -108,24 +87,23 @@ __build_prompt() {
             # --porcelain 格式稳定，易于解析
             git_status=$(git status --porcelain --ignore-submodules 2>/dev/null)
 
-            # 检查是否有修改 (Modified)
-            if echo "$git_status" | grep -q "^.M"; then
+            # Any worktree state in the second column is unstaged.
+            if printf '%s\n' "$git_status" | grep -q '^.[^ ?]'; then
                  git_flags+="!"
             fi
 
-            # 检查是否有暂存 (Staged / Added)
-            if echo "$git_status" | grep -q "^[MA]"; then
+            # Any index state in the first column is staged.
+            if printf '%s\n' "$git_status" | grep -q '^[^ ?]'; then
                  git_flags+="+"
             fi
 
-            # 检查是否有未追踪文件 (Untracked)
-            if echo "$git_status" | grep -q "^??"; then
+            if printf '%s\n' "$git_status" | grep -q '^??'; then
                  git_flags+="?"
             fi
 
             # 检查 Stash (这是唯一需要额外调用的地方，但也很快)
             if git rev-parse --verify refs/stash &>/dev/null; then
-                 git_flags+="$"
+                 git_flags+='$'
             fi
         fi
 
@@ -134,8 +112,11 @@ __build_prompt() {
             git_flags=" [${git_flags}]"
         fi
 
-        # 拼接 Git 信息
-        p+="${prompt_white} on ${prompt_violet}${branch_name}${prompt_blue}${git_flags}"
+        # Keep untrusted branch text out of PS1 itself. Prompt parameter
+        # expansion is single-pass, so this displays the value without
+        # evaluating command substitutions contained in a branch name.
+        __prompt_git_branch=$branch_name
+        p+="${prompt_white} on ${prompt_violet}\${__prompt_git_branch}${prompt_blue}${git_flags}"
     fi
 
     # ------------------------------------------------------------------
@@ -147,8 +128,12 @@ __build_prompt() {
     export PS1="$p"
 }
 
-# 使用 PROMPT_COMMAND 在每次显示提示符前构建 PS1
-PROMPT_COMMAND=__build_prompt
+# Preserve existing prompt hooks and avoid adding ours twice when re-sourced.
+case "${PROMPT_COMMAND:-}" in
+    *'__build_prompt'*) ;;
+    '') PROMPT_COMMAND=__build_prompt ;;
+    *) PROMPT_COMMAND="${PROMPT_COMMAND}"$'\n''__build_prompt' ;;
+esac
 
 # PS2 (多行命令时的提示符) 不需要动态计算
 export PS2="${prompt_yellow}→ ${prompt_reset}"

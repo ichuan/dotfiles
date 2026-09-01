@@ -1,17 +1,21 @@
-# Compiled Python files
-*.pyc
+# Secrets and machine-local overrides
+.env
+.env.*
+!.env.example
+!.env.*.example
+.extra
+.path
+.gitconfig.local
 
-# Folder view configuration files
-.DS_Store
-Desktop.ini
+# Local histories and state
+.*_history
+.lesshst
+.viminfo
+.wget-hsts
 
-# Thumbnail cache files
-._*
-Thumbs.db
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
+# Only track the portable SSH authorization list
+.ssh/*
+!.ssh/authorized_keys
 
 # Only track portable AI instructions
 .claude/*

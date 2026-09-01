@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # typo
 alias snv=svn
 alias Grep=grep
@@ -8,16 +10,22 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# List all files colorized in long format
-alias ls="ls -Fh --color"
-alias ll="ls -Flv --color"
-alias la="ls -aFlv --color"
+# List all files colorized in long format (GNU or BSD ls).
+if command ls --color=auto -d . >/dev/null 2>&1; then
+	alias ls='ls -Fh --color=auto'
+	alias ll='ls -Fhvl --color=auto'
+	alias la='ls -aFhvl --color=auto'
+else
+	alias ls='ls -FhG'
+	alias ll='ls -FhvlG'
+	alias la='ls -aFhvlG'
+fi
 alias lh=ll
 
 # Always enable colored `grep` output
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias fgrep='grep -F --color=auto'
+alias egrep='grep -E --color=auto'
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
@@ -48,30 +56,30 @@ command -v sha1sum > /dev/null || alias sha1sum="shasum"
 alias rot13='tr a-zA-Z n-za-mN-ZA-M'
 
 # URL-encode strings
-alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse; print(urllib.parse.quote_plus(sys.argv[1]))"'
 
 # fix tmux & vi color issue: http://stackoverflow.com/questions/10158508/lose-vim-colorscheme-in-tmux-mode
 # alias tmux="TERM=screen-256color-bce tmux"
 
-alias cnpm="npm --registry=https://registry.npmmirror.com --cache=$HOME/.npm/.cache/cnpm --disturl=https://npmmirror.com/mirrors/node --userconfig=$HOME/.cnpmrc"
+alias cnpm='npm --registry=https://registry.npmmirror.com --cache="$HOME/.npm/.cache/cnpm" --disturl=https://npmmirror.com/mirrors/node --userconfig="$HOME/.cnpmrc"'
 
 alias i="vi"
 
-# alias for `pbcopy` and `pbpaste`
-if grep -iq "microsoft" /proc/sys/kernel/osrelease; then
-  # WSL environment
-  if command -v powershell.exe &> /dev/null; then # Check if powershell is available
-    alias pbcopy='iconv -f utf-8 -t gbk | clip.exe'
-    alias pbpaste='powershell.exe -Command "Get-Clipboard"'
-  fi
-  alias open='explorer.exe .'
+# Aliases for `pbcopy` and `pbpaste`.
+if command -v clip.exe >/dev/null 2>&1 && command -v powershell.exe >/dev/null 2>&1; then
+	# WSL environment
+	alias pbcopy='iconv -f utf-8 -t gbk | clip.exe'
+	alias pbpaste='powershell.exe -NoProfile -Command "Get-Clipboard"'
+	if command -v explorer.exe >/dev/null 2>&1; then
+		alias open='explorer.exe .'
+	fi
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # linux environment, check for xclip or wl-clipboard
-    if command -v xclip &> /dev/null; then
-        alias pbcopy='xclip -selection clipboard'
-        alias pbpaste='xclip -selection clipboard -o'
-    elif command -v wl-paste &> /dev/null; then
-        alias pbpaste='wl-paste'
-        alias pbcopy='wl-copy'
-    fi
+	# Linux environment, check for X11 or Wayland clipboard tools.
+	if command -v xclip >/dev/null 2>&1; then
+		alias pbcopy='xclip -selection clipboard'
+		alias pbpaste='xclip -selection clipboard -o'
+	elif command -v wl-paste >/dev/null 2>&1 && command -v wl-copy >/dev/null 2>&1; then
+		alias pbpaste='wl-paste'
+		alias pbcopy='wl-copy'
+	fi
 fi

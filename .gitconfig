@@ -1,7 +1,7 @@
 [core]
 	editor = vim
-	# Use custom `.gitignore`
-	excludesfile = ~/.gitignore
+	# Use a dedicated global ignore file.
+	excludesfile = ~/.config/git/ignore
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 	# Make `git rebase` safer on macOS.
@@ -17,8 +17,6 @@
 	co = checkout
 	ci = commit
 	br = branch
-	# Commit all changes.
-	ca = !git add -A && git commit -av
 	# View the current working tree status using the short format.
 	s = status -s
 	# Show the diff between the latest commit and the current state
@@ -37,6 +35,9 @@
 [branch]
 	# Show most recently changed branches first.
 	sort = -committerdate
+[fetch]
+	# Remove remote-tracking branches deleted upstream.
+	prune = true
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
@@ -52,8 +53,14 @@
 	# Use `hexdump` to diff binary files.
 	textconv = hexdump -v -C
 [help]
-	# Automatically correct and execute mistyped commands.
-	autocorrect = 1
+	# Ask before running a corrected command.
+	autocorrect = prompt
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+[user]
+	# Require an explicitly configured commit identity.
+	useConfigOnly = true
+[include]
+	# Keep machine-specific identity and settings outside this repository.
+	path = ~/.gitconfig.local

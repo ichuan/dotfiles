@@ -1,0 +1,65 @@
+[font]
+size = 12.0
+offset = { x = 0, y = 2 }
+
+[font.normal]
+family = "IBM Plex Mono"
+style = "Regular"
+
+[font.bold]
+family = "IBM Plex Mono"
+style = "Semibold"
+
+[font.italic]
+family = "IBM Plex Mono"
+style = "Regular Italic"
+
+[font.bold_italic]
+family = "IBM Plex Mono"
+style = "Semibold Italic"
+
+[colors.primary]
+background = "#000000"
+foreground = "#fffbf6"
+
+[colors.normal]
+black = "#2e2e2e"
+red = "#eb4129"
+green = "#abe047"
+yellow = "#f6c744"
+blue = "#47a0f3"
+magenta = "#7b5cb0"
+cyan = "#64dbed"
+white = "#e5e9f0"
+
+[colors.bright]
+black = "#565656"
+red = "#ec5357"
+green = "#c0e17d"
+yellow = "#f9da6a"
+blue = "#49a4f8"
+magenta = "#a47de9"
+cyan = "#99faf2"
+white = "#ffffff"
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t/;="
+
+[terminal]
+osc52 = "OnlyCopy"
+
+[keyboard]
+bindings = [
+  { key = "T", mods = "Command", action = "CreateNewWindow" },
+  { key = "N", mods = "Command", action = "CreateNewWindow" },
+  { key = "Space", mods = "Alt", chars = " " },
+  { key = "Backspace", mods = "Super", chars = "\u0015" },
+  { key = "Left", mods = "Alt", chars = "\u001bb" },
+  { key = "Right", mods = "Alt", chars = "\u001bf" },
+  { key = "Left", mods = "Command", mode = "AppCursor", chars = "\u001bOH" },
+  { key = "Right", mods = "Command", mode = "AppCursor", chars = "\u001bOF" },
+  { key = "F", mods = "Alt", chars = "\u001bf" },
+  { key = "B", mods = "Alt", chars = "\u001bb" },
+  { key = "D", mods = "Alt", chars = "\u001bd" },
+  { key = ".", mods = "Alt", chars = "\u001b." },
+]

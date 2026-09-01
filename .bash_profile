@@ -1,70 +1,120 @@
-# OSX: after `brew install coreutils`
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:/usr/local/sbin:/usr/local/bin:${HOME}/bin:/usr/local/opt/python/libexec/bin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export ANDROID_HOME=~/Library/Android/sdk
-export ANDROID_SDK_ROOT=~/Library/Android/sdk
-export PATH="$PATH:${ANDROID_HOME}/tools"
-export PATH="$PATH:${ANDROID_HOME}/platform-tools"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:${HOME}/.local/bin"
-export PATH="$PATH:${HOME}/.cargo/bin"
-export PATH="/usr/local/opt/openssl/bin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+# shellcheck shell=bash
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && source "$file"
-done
-unset file
+_DOTFILES_BASH_PROFILE_ACTIVE=1
 
-# Case-insensitive globbing (used in pathname expansion)
-shopt -s nocaseglob
-
-# Append to the Bash history file, rather than overwriting it
-shopt -s histappend
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
-
-# Enable some Bash 4 features when possible:
-# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null
-done
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh
-
-# If possible, add tab completion for many more commands
-[ -f /etc/bash_completion ] && source /etc/bash_completion
-
-# OSX: after `brew install bash_completion`
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-
-# dircolors from https://github.com/seebi/dircolors-solarized
-eval `dircolors ~/.dircolors.ansi-dark`
-
-# https://pipenv.kennethreitz.org/en/latest/install/#virtualenv-mapping-caveat
-export PIPENV_VENV_IN_PROJECT=1
-export POETRY_VIRTUALENVS_IN_PROJECT=true
-export POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON=true
-
-# nvm and node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv > /dev/null && {
-  eval "$(pyenv init --path)"
-  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-  if [ -n "$PS1" -a -n "$BASH_VERSION" ]; then
-    eval "$(pyenv init -)"
-  fi
+_path_prepend() {
+	[ -d "$1" ] || return 0
+	case ":${PATH:-}:" in
+		*":$1:"*) ;;
+		*) PATH="$1${PATH:+:$PATH}" ;;
+	esac
 }
+
+_path_append() {
+	[ -d "$1" ] || return 0
+	case ":${PATH:-}:" in
+		*":$1:"*) ;;
+		*) PATH="${PATH:+$PATH:}$1" ;;
+	esac
+}
+
+_manpath_prepend() {
+	[ -d "$1" ] || return 0
+	case ":${MANPATH:-}:" in
+		*":$1:"*) ;;
+		*)
+			if [ -n "${MANPATH:-}" ]; then
+				MANPATH="$1:$MANPATH"
+			else
+				MANPATH="$1:"
+			fi
+			;;
+	esac
+}
+
+# Initialize Homebrew at its standard Intel, Apple Silicon, or Linux prefix.
+brew_command=
+if [ -z "${HOMEBREW_PREFIX:-}" ]; then
+	if command -v brew >/dev/null 2>&1; then
+		brew_command=$(command -v brew)
+	else
+		for candidate in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+			if [ -x "$candidate" ]; then
+				brew_command=$candidate
+				break
+			fi
+		done
+	fi
+	if [ -n "$brew_command" ]; then
+		eval "$("$brew_command" shellenv)"
+	fi
+fi
+
+_path_prepend "$HOME/bin"
+_path_prepend /usr/local/sbin
+_path_prepend /usr/local/bin
+if [ -n "${HOMEBREW_PREFIX:-}" ]; then
+	_path_prepend "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+	_manpath_prepend "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman"
+	_path_prepend "$HOMEBREW_PREFIX/opt/openssl/bin"
+	_path_prepend "$HOMEBREW_PREFIX/opt/curl/bin"
+fi
+
+if [ -d "$HOME/Library/Android/sdk" ]; then
+	export ANDROID_HOME="${ANDROID_HOME:-$HOME/Library/Android/sdk}"
+	export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+fi
+if [ -n "${ANDROID_HOME:-}" ] && [ -d "$ANDROID_HOME" ]; then
+	_path_append "$ANDROID_HOME/tools"
+	_path_append "$ANDROID_HOME/platform-tools"
+fi
+
+_path_append /usr/local/go/bin
+_path_append "$HOME/.local/bin"
+_path_append "$HOME/.cargo/bin"
+_path_append /opt/nvim-linux-x86_64/bin
+export PATH
+if [ -n "${MANPATH:-}" ]; then
+	export MANPATH
+fi
+
+# Load shared settings, then interactive helpers, before local overrides.
+for file in "$HOME/.path" "$HOME/.exports"; do
+	if [ -r "$file" ]; then
+		# shellcheck source=/dev/null
+		. "$file"
+	fi
+done
+
+case $- in
+	*i*)
+		for file in "$HOME/.bash_prompt" "$HOME/.aliases" "$HOME/.functions"; do
+			if [ -r "$file" ]; then
+				# shellcheck source=/dev/null
+				. "$file"
+			fi
+		done
+		;;
+esac
+
+if [ -r "$HOME/.extra" ]; then
+	# shellcheck source=/dev/null
+	. "$HOME/.extra"
+fi
+
+export PYENV_ROOT="${PYENV_ROOT:-$HOME/.pyenv}"
+_path_prepend "$PYENV_ROOT/bin"
+export PATH
+if command -v pyenv >/dev/null 2>&1; then
+	eval "$(pyenv init --path)"
+fi
+
+unset brew_command candidate file
+unset -f _path_prepend _path_append _manpath_prepend
+
+# Finish interactive-only setup in .bashrc.
+if [ -r "$HOME/.bashrc" ]; then
+	# shellcheck source=/dev/null
+	. "$HOME/.bashrc"
+fi
+unset _DOTFILES_BASH_PROFILE_ACTIVE

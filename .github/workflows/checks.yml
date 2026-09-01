@@ -1,0 +1,32 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Check Bash syntax
+        run: >-
+          bash -n bootstrap.sh .aliases .bash_profile .bash_prompt .bashrc
+          .exports .functions tests/smoke.sh
+
+      - name: Run ShellCheck
+        run: >-
+          shellcheck --shell=bash bootstrap.sh .aliases .bash_profile
+          .bash_prompt .bashrc .exports .functions tests/smoke.sh
+
+      - name: Run smoke tests
+        run: bash tests/smoke.sh

@@ -29,8 +29,6 @@ set colorcolumn=88
 
 " UTF8 编码
 set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
 
 " 不自动备份
 set nobackup
@@ -53,26 +51,26 @@ set mouse=
 set pastetoggle=<f9>
 
 " prepend python header
-function HeaderPython()
+function! HeaderPython() abort
 	call setline(1, "#!/usr/bin/env python")
 	call append(1, "# coding: utf-8")
 	call append(2, "# yc@" . strftime('%Y/%m/%d', localtime()))
 	normal G
 	normal o
 	normal o
-endf
-autocmd bufnewfile *.py call HeaderPython()
+endfunction
 
 " 折叠
 set foldmethod=marker
 set foldnestmax=2
-autocmd BufRead,BufNewFile *.py set foldmethod=indent foldlevel=99
+augroup dotfiles_python
+  autocmd!
+  autocmd BufNewFile *.py call HeaderPython()
+  autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent foldlevel=99
+augroup END
 " press space to fold/unfold code
 nnoremap <space> za
 vnoremap <space> zf
-
-" ini highlight for conf file
-autocmd BufRead,BufNewFile *.conf setf dosini
 
 " 自动缩进
 set autoindent
@@ -130,16 +128,6 @@ let g:ale_fixers = {
 \}
 let g:ale_javascript_prettier_options = '--single-quote'
 let g:ale_fix_on_save = 1
-
-" YCM
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
-" Ctrl+i to goto definition or declaration
-" Ctrl+k to goto references
-nnoremap <C-i> :YcmCompleter GoTo<CR>
-nnoremap <C-k> :YcmCompleter GoToReferences<CR>
-
-let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Lightline
 let g:lightline = {
